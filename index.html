@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitama Memories | Timeless Portraits Bali</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. DESIGN SYSTEM --- */
+        :root {
+            --primary: #1F2823;       /* Hijau Gelap */
+            --accent: #3A5F40;        /* Hijau Nitama */
+            --bg-body: #FAFAF8;       /* Cream/Putih Tulang */
+            --bg-white: #FFFFFF;
+            --text-muted: #666666;
+            
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            --shadow-card: 0 15px 30px -5px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--primary);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        h1, h2, h3 { font-family: var(--font-head); color: var(--primary); font-weight: 500; }
+        
+        .section-subtitle {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px;
+            color: var(--accent); font-weight: 600; display: block; margin-bottom: 15px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { width: 100%; display: block; object-fit: cover; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-block; padding: 14px 35px;
+            background-color: var(--primary); color: var(--bg-white);
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;
+            font-weight: 500; border: 1px solid var(--primary);
+            transition: var(--transition); cursor: pointer;
+        }
+        .btn:hover {
+            background-color: transparent; color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* --- 2. HEADER & LOGO FIX (Update Terbaru) --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: var(--transition);
+        }
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 10px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        /* Container Logo */
+        .logo-container {
+            display: flex; align-items: center; gap: 10px; /* Jarak icon & teks */
+            text-decoration: none; transition: var(--transition);
+        }
+
+        /* PERBAIKAN UKURAN LOGO DI SINI */
+        .logo-img {
+            height: 100px;       /* Ukuran diperbesar drastis */
+            width: auto; 
+            display: block;
+            transform: scale(1.5); /* Zoom sedikit biar isi lebih penuh */
+            /* mix-blend-mode: multiply; -> Aktifkan jika background logo putih kotak */
+        }
+
+        /* Teks Logo */
+        .logo-text {
+            font-family: var(--font-head);
+            font-size: 1.5rem; font-weight: 600; letter-spacing: 0.5px;
+            color: inherit; margin-top: 5px; /* Penyesuaian vertikal sedikit */
+        }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            position: relative; font-weight: 500;
+        }
+        
+        /* Warna Menu Adaptif */
+        header:not(.scrolled) .logo-container,
+        header:not(.scrolled) .nav-links a { color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        
+        header.scrolled .logo-container,
+        header.scrolled .nav-links a { color: var(--primary); text-shadow: none; }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--accent); transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
+            background: linear-gradient(rgba(20, 30, 20, 0.4), rgba(20, 30, 20, 0.4)), url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: var(--bg-white);
+        }
+
+        .hero-content { max-width: 850px; padding: 2rem; animation: fadeUp 1.2s ease-out; }
+        
+        /* JUDUL PUTIH */
+        .hero h1 { 
+            font-size: 4rem; margin-bottom: 1.5rem; font-style: italic; 
+            line-height: 1.2; color: #ffffff; 
+        }
+        .hero p { 
+            font-size: 1.1rem; margin-bottom: 2.5rem; font-weight: 300; 
+            letter-spacing: 1px; opacity: 0.95; color: #ffffff; 
+        }
+        
+        .btn-hero { border-color: #fff; background: transparent; color: #fff; }
+        .btn-hero:hover { background: #fff; color: var(--primary); }
+
+       /* --- 4. SERVICES (EDITORIAL STYLE) --- */
+        .services-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px; /* Jarak antar kolom lebih lega */
+            margin-top: 80px;
+        }
+
+        .service-card {
+            background: transparent; /* Hapus background putih */
+            padding: 20px 0;         /* Padding vertikal saja */
+            text-align: left;        /* Rata kiri (lebih editorial) */
+            border-top: 1px solid rgba(0,0,0,0.1); /* Garis tipis di atas */
+            box-shadow: none;        /* Hapus bayangan */
+            transition: var(--transition);
+            position: relative;
+        }
+
+        /* Efek Hover: Garis menebal */
+        .service-card:hover { 
+            transform: translateY(-5px); 
+            border-top: 1px solid var(--accent); 
+        }
+
+        /* Ganti Icon dengan Nomor Besar */
+        .service-num { 
+            font-family: var(--font-head);
+            font-size: 3rem; 
+            color: var(--accent); 
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 20px;
+            display: block;
+            font-style: italic;
+        }
+
+        .service-card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 15px; 
+            letter-spacing: -0.5px;
+        }
+        
+        .service-card p { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            line-height: 1.7;
+        }
+        /* --- 5. PORTFOLIO (9 ITEMS) --- */
+        .portfolio-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+        }
+        .portfolio-item { position: relative; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; border-radius: 2px; }
+        .portfolio-item img { height: 100%; width: 100%; transition: transform 0.8s ease; }
+
+        .portfolio-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(31, 40, 35, 0.8);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; transition: var(--transition);
+        }
+        .portfolio-overlay h4 { color: #fff; font-size: 1.5rem; transform: translateY(20px); transition: 0.5s; font-family: var(--font-head); }
+        .portfolio-overlay span { color: #ddd; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; transform: translateY(20px); transition: 0.5s 0.1s; }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-item:hover h4, .portfolio-item:hover span { transform: translateY(0); }
+        .portfolio-item:hover img { transform: scale(1.1); }
+
+        /* --- 6. ABOUT --- */
+        .about-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-image { position: relative; }
+        .about-image img { border-radius: 4px; box-shadow: var(--shadow-card); }
+        .about-image::after {
+            content: ''; position: absolute; top: -20px; left: -20px;
+            width: 100%; height: 100%; border: 1px solid var(--accent); z-index: -1;
+        }
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; line-height: 1.3; }
+
+        /* --- 7. FOOTER --- */
+        footer { background-color: var(--primary); color: var(--bg-white); padding: 100px 0; text-align: center; }
+        footer h2 { color: #fff; font-size: 3rem; margin-bottom: 20px; }
+
+        /* Animasi */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 3rem; }
+        }
+        @media (max-width: 600px) {
+            .about-section { grid-template-columns: 1fr; gap: 40px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .logo-img { height: 60px; } /* Sedikit lebih kecil di HP */
+            .logo-text { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <img src="logo-nitama.png" alt="Nitama Logo" class="logo-img">
+                    <span class="logo-text">nitama.memories</span>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Framing Memories Into<br>Timeless Portraits</h1>
+            <p>Based in Bali. Capturing Graduation, Love, and Life's Unscripted Moments.</p>
+            <a href="#portfolio" class="btn btn-hero">Explore Gallery</a>
+        </div>
+    </section>
+
+   <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-subtitle">Our Approach</span>
+                <h2 class="section-title">The Offerings</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <span class="service-num">01</span>
+                    <h3>Graduation Stories</h3>
+                    <p>Lebih dari sekadar toga dan ijazah. Kami merekam rasa bangga, tawa lega, dan momen transisi menuju masa depan. Elegan, rapi, namun tetap bercerita.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <span class="service-num">02</span>
+                    <h3>Love & Kinship</h3>
+                    <p>Momen intim bersama pasangan atau keluarga. Kami menghindari pose kaku, membiarkan interaksi terjadi secara natural di depan lensa.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <span class="service-num">03</span>
+                    <h3>Portraiture</h3>
+                    <p>Sesi potret personal untuk merayakan dirimu saat ini. Baik untuk <i>personal branding</i> atau sekadar mendokumentasikan fase hidup di Bali.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding" style="background-color: #fff;">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 60px;">
+                <span class="section-subtitle">Visual Diary</span>
+                <h2 class="section-title">Selected Works</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+                    Kumpulan cerita visual yang telah kami bingkai.
+                </p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1621600411688-4be93cd68504?q=80&w=800&auto=format&fit=crop" alt="Graduation">
+                    <div class="portfolio-overlay">
+                        <h4>Graduation</h4>
+                        <span>The Achievement</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Outdoor Portrait">
+                    <div class="portfolio-overlay">
+                        <h4>Outdoor</h4>
+                        <span>Natural Light</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1000&auto=format&fit=crop" alt="Timeless Portrait">
+                    <div class="portfolio-overlay">
+                        <h4>Timeless</h4>
+                        <span>Black & White</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="Personal">
+                    <div class="portfolio-overlay">
+                        <h4>Personal</h4>
+                        <span>Canggu Session</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop" alt="Wedding">
+                    <div class="portfolio-overlay">
+                        <h4>Moments</h4>
+                        <span>Intimate Wedding</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="Graduation Detail">
+                    <div class="portfolio-overlay">
+                        <h4>Details</h4>
+                        <span>Graduation Day</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Nature">
+                    <div class="portfolio-overlay">
+                        <h4>Atmosphere</h4>
+                        <span>Kintamani</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1000&auto=format&fit=crop" alt="Details">
+                    <div class="portfolio-overlay">
+                        <h4>Details</h4>
+                        <span>The Rings</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000&auto=format&fit=crop" alt="Studio">
+                    <div class="portfolio-overlay">
+                        <h4>Studio</h4>
+                        <span>Classic Portrait</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center reveal" style="margin-top: 60px;">
+                <a href="https://instagram.com/nitama.memories" class="btn" style="background: transparent; border-color: var(--primary); color: var(--primary);">View More on Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-section">
+                <div class="about-image reveal">
+    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop" 
+         alt="Photographer holding camera"
+         style="min-height: 400px; background-color: #eee;"> 
+</div>
+                <div class="about-text reveal">
+                    <span class="section-subtitle">About Nitama</span>
+                    <h2>Framing your story into a visual legacy.</h2>
+                    <p>Based in the heart of Bali, we specialize in capturing life's most pivotal moments. We believe photography is not just about clicking a shutter; it's about freezing an emotion.</p>
+                    <p>Our style is clean, natural, and timeless. We avoid over-editing to ensure the true beauty of the moment shines through.</p>
+                    <a href="#contact" class="btn" style="margin-top: 10px;">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container reveal">
+            <h2>Ready to frame your story?</h2>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px;">Ready to create something beautiful? Let's talk.</p>
+            
+            <a href="mailto:contact@nitamamemories.com" class="btn" style="background-color: var(--bg-white); color: var(--primary); border: none;">Contact via Email</a>
+            <div style="margin-top: 15px;">
+                <a href="#" style="color: white; font-size: 0.9rem; border-bottom: 1px solid white; padding-bottom: 2px;">or WhatsApp Us</a>
+            </div>
+
+            <div style="margin-top: 80px; font-size: 0.8rem; color: rgba(255,255,255,0.4);">
+                <p>&copy; 2024 Nitama Memories. Made in Bali.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
